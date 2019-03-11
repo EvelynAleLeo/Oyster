@@ -9,4 +9,14 @@ describe Oystercard do
     oystercard = Oystercard.new
     expect(oystercard.balance).to eq 0
   end
+  # In order to keep using public transport
+  # As a customer
+  # I want to add money to my card
+
+  it 'should add money to the card' do
+    oystercard = Oystercard.new
+    oystercard.top_up(5)
+    expect(oystercard.balance).to eq 5
+  end
+
 end
