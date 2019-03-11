@@ -18,5 +18,14 @@ describe Oystercard do
     oystercard.top_up(5)
     expect(oystercard.balance).to eq 5
   end
+# In order to protect my money from theft or loss
+  # As a customer
+  # I want a maximum limit of 90 pounds on my card
+
+  it 'tells you if you have topped up too much' do
+    oystercard = Oystercard.new
+    expect { oystercard.top_up(95) }.to raise_error 'You have topped up too much'
+  end
+
 
 end

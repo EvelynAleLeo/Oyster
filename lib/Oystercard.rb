@@ -7,7 +7,13 @@ class Oystercard
   end
 
   def top_up(money)
-    @balance = money
+    
+    if money > 90
+      raise 'You have topped up too much'
+    else
+      @balance = money
+    end
+
   end
   # def balance
   #   @balance
