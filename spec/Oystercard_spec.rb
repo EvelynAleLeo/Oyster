@@ -24,7 +24,7 @@ describe Oystercard do
 
   it 'tells you if you have topped up too much' do
     oystercard = Oystercard.new
-    expect { oystercard.top_up(95) }.to raise_error 'You have topped up too much'
+    expect { oystercard.top_up(95) }.to raise_error "You have topped up more than 90"
   end
 
 
