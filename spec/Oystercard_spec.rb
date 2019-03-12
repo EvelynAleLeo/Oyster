@@ -51,9 +51,18 @@ describe Oystercard do
 
   it 'can touch in' do
     oystercard = Oystercard.new
+    oystercard.top_up(10)
     oystercard.touch_in
     expect(oystercard).to be_in_journey
   end
 
+#   In order to pay for my journey
+# As a customer
+# I need to have the minimum amount (£1) for a single journey.
+
+  it 'raises an error message' do
+    oystercard = Oystercard.new
+    expect { oystercard.touch_in }.to raise_error "You need a minimum amount (£1) for a single journey"
+  end
 
 end

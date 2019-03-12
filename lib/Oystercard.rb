@@ -2,6 +2,7 @@ class Oystercard
 
   attr_reader :balance
   LIMIT = 90
+  MINIMUM = 1
 
 
   def initialize
@@ -32,7 +33,12 @@ class Oystercard
   end
 
   def touch_in
+    check_balance
     @in_journey = true
+  end
+
+  def check_balance
+    raise "You need a minimum amount (£1) for a single journey" if @balance < MINIMUM
   end
   # def balance
   #   @balance
