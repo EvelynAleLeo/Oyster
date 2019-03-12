@@ -31,12 +31,12 @@ describe Oystercard do
   #As a customer
   #I need my fare deducted from my card
 
-  it 'reduces balance after paying a journey' do 
-    oystercard = Oystercard.new
-    oystercard.top_up(10)
-    oystercard.deduct(2)
-    expect(oystercard.balance).to eq 8
-  end
+  # it 'reduces balance after paying a journey' do 
+  #   oystercard = Oystercard.new
+  #   oystercard.top_up(10)
+  #   oystercard.deduct(2)
+  #   expect(oystercard.balance).to eq 8
+  # end
 
   #In order to get through the barriers
   #As a customer
@@ -63,6 +63,17 @@ describe Oystercard do
   it 'raises an error message' do
     oystercard = Oystercard.new
     expect { oystercard.touch_in }.to raise_error "You need a minimum amount (£1) for a single journey"
+  end
+
+#   In order to pay for my journey
+# As a customer
+# When my journey is complete, I need the correct amount deducted from my card
+
+  it 'deducts the amount from balance when we touch out' do
+    oystercard = Oystercard.new
+    oystercard.top_up(10)
+    oystercard.touch_in
+    expect {oystercard.touch_out}.to change {oystercard.balance}.by(-2)
   end
 
 end

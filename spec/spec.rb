@@ -19,5 +19,17 @@ require './lib/Oystercard.rb'
 # As a customer
 # I need to have the minimum amount (£1) for a single journey.
 
+# card = Oystercard.new
+# p card.touch_in == "saying not enough balance" #raise an error message 
+
+# In order to pay for my journey
+# As a customer
+# When my journey is complete, I need the correct amount deducted from my card
+
 card = Oystercard.new
-p card.touch_in == "saying not enough balance" #raise an error message 
+card.top_up(10)
+card.touch_in
+card.touch_out
+card.balance to change by 2
+
+
