@@ -27,5 +27,15 @@ describe Oystercard do
     expect { oystercard.top_up(95) }.to raise_error "You have topped up more than 90"
   end
 
+  #In order to pay for my journey
+  #As a customer
+  #I need my fare deducted from my card
+
+  it 'reduces balance after paying a journey' do 
+    oystercard = Oystercard.new
+    oystercard.top_up(10)
+    oystercard.deduct(2)
+    expect(oystercard.balance).to eq 8
+  end
 
 end
