@@ -38,4 +38,22 @@ describe Oystercard do
     expect(oystercard.balance).to eq 8
   end
 
+  #In order to get through the barriers
+  #As a customer
+  #I need to touch in and out
+  
+
+  it 'can touch out' do
+    oystercard = Oystercard.new
+    oystercard.touch_out
+    expect(oystercard).not_to be_in_journey # this is a predicate matcher
+  end
+
+  it 'can touch in' do
+    oystercard = Oystercard.new
+    oystercard.touch_in
+    expect(oystercard).to be_in_journey
+  end
+
+
 end
