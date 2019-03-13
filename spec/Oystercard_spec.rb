@@ -81,11 +81,18 @@ describe Oystercard do
 #   In order to pay for my journey
 # As a customer
 # I need to know where I've travelled from
-it 'stores my entry station' do
-  oystercard = Oystercard.new
-  oystercard.top_up(10)
-  oystercard.touch_in(station)
-expect(oystercard.entry_station).to eq station
-end
+  it 'stores my entry station when touching in' do
+    oystercard = Oystercard.new
+    oystercard.top_up(10)
+    oystercard.touch_in(station)
+    expect(oystercard.entry_station).to eq station
+  end
 
+  it 'forgets the entry station when touching out' do
+    oystercard = Oystercard.new
+    oystercard.top_up(10)
+    oystercard.touch_in(station)
+    oystercard.touch_out
+    expect(oystercard.entry_station).to eq nil
+  end
 end
