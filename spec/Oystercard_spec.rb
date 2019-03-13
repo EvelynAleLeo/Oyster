@@ -1,6 +1,8 @@
 require 'Oystercard.rb'
 
 describe Oystercard do
+
+  let(:station) { double :station }
   # In order to use public transport
   # As a customer
   # I want money on my card
@@ -52,7 +54,7 @@ describe Oystercard do
   it 'can touch in' do
     oystercard = Oystercard.new
     oystercard.top_up(10)
-    oystercard.touch_in
+    oystercard.touch_in(station)
     expect(oystercard).to be_in_journey
   end
 
@@ -62,7 +64,7 @@ describe Oystercard do
 
   it 'raises an error message' do
     oystercard = Oystercard.new
-    expect { oystercard.touch_in }.to raise_error "You need a minimum amount (£1) for a single journey"
+    expect { oystercard.touch_in(station) }.to raise_error "You need a minimum amount (£1) for a single journey"
   end
 
 #   In order to pay for my journey
@@ -72,8 +74,18 @@ describe Oystercard do
   it 'deducts the amount from balance when we touch out' do
     oystercard = Oystercard.new
     oystercard.top_up(10)
-    oystercard.touch_in
+    oystercard.touch_in(station)
     expect {oystercard.touch_out}.to change {oystercard.balance}.by(-2)
   end
+
+#   In order to pay for my journey
+# As a customer
+# I need to know where I've travelled from
+it 'stores my entry station' do
+  oystercard = Oystercard.new
+  oystercard.top_up(10)
+  oystercard.touch_in(station)
+expect(oystercard.entry_station).to eq station
+end
 
 end
