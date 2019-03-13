@@ -3,6 +3,7 @@ require 'Oystercard.rb'
 describe Oystercard do
 
   let(:station) { double :station }
+  let(:station2) { double :station }
   # In order to use public transport
   # As a customer
   # I want money on my card
@@ -47,7 +48,7 @@ describe Oystercard do
 
   it 'can touch out' do
     oystercard = Oystercard.new
-    oystercard.touch_out
+    oystercard.touch_out(station)
     expect(oystercard).not_to be_in_journey # this is a predicate matcher
   end
 
@@ -75,7 +76,7 @@ describe Oystercard do
     oystercard = Oystercard.new
     oystercard.top_up(10)
     oystercard.touch_in(station)
-    expect {oystercard.touch_out}.to change {oystercard.balance}.by(-2)
+    expect {oystercard.touch_out(station2)}.to change {oystercard.balance}.by(-2)
   end
 
 #   In order to pay for my journey
@@ -92,7 +93,15 @@ describe Oystercard do
     oystercard = Oystercard.new
     oystercard.top_up(10)
     oystercard.touch_in(station)
-    oystercard.touch_out
+    oystercard.touch_out(station2)
     expect(oystercard.entry_station).to eq nil
+  end
+
+  it 'stores my exit station when touching out' do
+    oystercard = Oystercard.new
+    oystercard.top_up(10)
+    oystercard.touch_in(station)
+    oystercard.touch_out(station2)
+    expect(oystercard.exit_station).to eq station2
   end
 end
